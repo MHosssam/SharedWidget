@@ -36,7 +36,7 @@ class TextFormFieldWidget extends TextFormField {
             filled: isBorder,
             contentPadding: EdgeInsets.symmetric(
               horizontal: 16.0,
-              vertical: 0.0,
+              vertical: 10.0,
             ),
             errorStyle: TextStyle(
               color: Colors.red,
