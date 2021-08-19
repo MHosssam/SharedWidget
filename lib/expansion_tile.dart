@@ -7,14 +7,12 @@ import 'text_widget.dart';
 class ExpansionTile extends StatelessWidget {
   const ExpansionTile({
     Key? key,
-    required this.isOpen,
     required this.title,
     required this.controller,
     required this.children,
     required this.mainColor,
     required this.secondColor,
   }) : super(key: key);
-  final RxBool isOpen;
   final String title;
   final controller;
   final Widget children;
@@ -22,8 +20,8 @@ class ExpansionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
+    return ObxValue<RxBool>(
+      (isOpen) => Container(
         margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: isOpen.value ? secondColor : mainColor,
@@ -76,6 +74,7 @@ class ExpansionTile extends StatelessWidget {
           ],
         ),
       ),
+      false.obs,
     );
   }
 }
