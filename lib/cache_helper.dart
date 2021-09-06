@@ -37,3 +37,17 @@ class CacheHelperService extends GetxService {
     return await sharedPreferences!.remove(key);
   }
 }
+/**
+ * Ex Get Data:
+ * 
+ * CacheHelperService.to.getData(key: 'key');
+ * 
+ * Ex put Data:
+ * 
+ * CacheHelperService.to.saveData(key: 'key' , value: 'value');
+ * 
+ * Ex Remove Data:
+ * 
+ * CacheHelperService.to.removeData(key: 'key');
+ * 
+ */

@@ -68,7 +68,7 @@ class DioHelperService extends GetxService {
 void getHomeData()
   {
 
-    DioHelper.getData(
+    DioHelperService.to.getData(
       url: HOME,
       token: token,
     ).then((value)
@@ -93,7 +93,7 @@ void userLogin({
   })
   {
 
-    DioHelper.postData(
+    DioHelperService.to.postData(
       url: LOGIN,
       data:
       {
