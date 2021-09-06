@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response;
 
 ///TODO:
 /*
  * dio: ^4.0.0 
  */
 
-class DioHelper {
-  static Dio? dio;
+class DioHelperService extends GetxService {
+  static DioHelperService get to => Get.find();
 
-  static init() {
+  Dio? dio;
+
+  init() {
     dio = Dio(
       BaseOptions(
         ///TODO: Base Url.
@@ -18,7 +21,7 @@ class DioHelper {
     );
   }
 
-  static Future<Response> getData({
+  Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
     String lang = 'en',
@@ -36,7 +39,7 @@ class DioHelper {
     );
   }
 
-  static Future<Response> postData({
+  Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
