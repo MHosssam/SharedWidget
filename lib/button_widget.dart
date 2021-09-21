@@ -2,46 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:shared_widget/text_widget.dart';
 
 class ButtonWidget extends StatelessWidget {
-  final Function()? onTap;
+  final void Function()? onTap;
   final String? title;
   final Widget? titleWidget;
   final Color? color, titleColor;
   final double? width, hieght, fontSize;
   final BorderRadius? borderRadius;
   final BoxBorder? border;
-  ButtonWidget(
-      {this.onTap,
-      this.color,
-      this.titleColor = Colors.white,
-      this.title,
-      this.hieght,
-      this.width,
-      this.fontSize = 18.0,
-      this.borderRadius,
-      this.titleWidget,
-      this.border});
+  final TextAlign? textAlign;
+  const ButtonWidget({
+    Key? key,
+    this.onTap,
+    this.color,
+    this.titleColor = Colors.white,
+    this.title,
+    this.hieght,
+    this.width,
+    this.fontSize,
+    this.borderRadius,
+    this.titleWidget,
+    this.border,
+    this.textAlign,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
         width: width,
-        height: hieght ?? 48,
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).buttonColor,
+          color: color ?? Theme.of(context).colorScheme.secondary,
           border: border,
-          borderRadius: borderRadius ?? BorderRadius.circular(3.0),
+          borderRadius: borderRadius ?? BorderRadius.circular(4.0),
         ),
-        child: Center(
-          child: title == null
-              ? titleWidget
-              : TextWidget(
+        child: title == null
+            ? titleWidget
+            : Padding(
+                padding: const EdgeInsets.only(top: 2.0),
+                child: TextWidget(
                   title ?? '',
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  color: titleColor,
+                  color: titleColor ?? Colors.black,
+                  textAlign: textAlign ?? TextAlign.center,
                 ),
-        ),
+              ),
       ),
     );
   }

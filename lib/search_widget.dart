@@ -4,7 +4,7 @@ import 'package:shared_widget/text_form_field_widget.dart';
 class SearchWidget extends StatelessWidget {
   final Color bgColor;
   final double? width, height;
-  final String hintText;
+  final String? hintText;
   final TextEditingController searchcontroller;
   final void Function(String?)? onChanged;
   final void Function()? ontap;
@@ -12,9 +12,9 @@ class SearchWidget extends StatelessWidget {
     Key? key,
     required this.searchcontroller,
     required this.bgColor,
-    required this.width,
+    this.width,
     this.height,
-    required this.hintText,
+    this.hintText = 'Search ...',
     this.onChanged,
     this.ontap,
   }) : super(key: key);
@@ -23,7 +23,7 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-      width: width,
+      width: width ?? 200,
       height: height ?? 40,
       decoration: BoxDecoration(
         boxShadow: [

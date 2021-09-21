@@ -3,13 +3,13 @@ import 'package:shared_widget/text_widget.dart';
 
 class NoItemWidget extends StatelessWidget {
   final Widget child;
-  final String text;
+  final String? text;
   final double? height;
 
   const NoItemWidget({
     Key? key,
     required this.child,
-    required this.text,
+    this.text,
     this.height,
   }) : super(key: key);
   @override
@@ -24,7 +24,7 @@ class NoItemWidget extends StatelessWidget {
               child: child,
             ),
             TextWidget(
-              text,
+              text ?? 'there is no items',
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),

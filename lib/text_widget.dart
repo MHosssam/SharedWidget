@@ -1,26 +1,34 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-class TextWidget extends AutoSizeText {
+class TextWidget extends Text {
   TextWidget(
-    String text, {
+    String? text, {
+    Key? key,
     Color? color,
     FontWeight? fontWeight,
     double? fontSize,
     double? height,
-    int? maxLines,
+    int? maxLines = 1,
     TextAlign? textAlign,
+    TextDecoration? decoration,
     TextOverflow? textOverflow,
     String? fontFamily,
+    TextDirection? textDirection,
   }) : super(
-          text,
+          text ?? '',
+          key: key,
           overflow: textOverflow,
+          textDirection: textDirection,
           style: TextStyle(
             color: color,
             fontWeight: fontWeight,
             fontSize: fontSize,
-            height: height ?? 1.5,
+            decoration: decoration,
+            height: height ?? 1,
             fontFamily: fontFamily,
+
+            ///TODO: add font family
+            //?? AppUi.fonts.arabicFont,
           ),
           textAlign: textAlign ?? TextAlign.center,
           maxLines: maxLines,

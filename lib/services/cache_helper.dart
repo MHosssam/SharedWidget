@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-///TODO:
 /*
  *shared_preferences: ^2.0.5 
  */
