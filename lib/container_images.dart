@@ -21,16 +21,16 @@ class ContainerImages extends StatelessWidget {
       margin: EdgeInsets.all(margin ?? 0),
       decoration: BoxDecoration(
         borderRadius: borderRadius ?? BorderRadius.circular(8.0),
+        image: DecorationImage(
+          image: NetworkImage(
+            imageurl != null
+                ? imageurl!
+                : 'https://musclemakergrillkw.com/wp-content/uploads/woocommerce-placeholder.png',
+          ),
+          fit: BoxFit.fill,
+        ),
       ),
-      child: (imageurl != null)
-          ? Image.network(
-              imageurl!,
-              fit: BoxFit.fill,
-            )
-          : Image.asset(
-              'assets/images/landscape.png',
-              fit: BoxFit.fill,
-            ),
     );
   }
 }
+//
