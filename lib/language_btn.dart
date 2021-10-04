@@ -14,38 +14,25 @@ class LanguageBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return Container(
-          margin: EdgeInsetsDirectional.only(end: 8.0),
-          child: ToggleSwitch(
-            minHeight: 30.0,
-            minWidth: 50.0,
-            activeBgColor: [
-              mainColor,
-            ],
-            totalSwitches: 2,
-            inactiveBgColor: Colors.black,
-            activeFgColor: Colors.black,
-            inactiveFgColor: Colors.white,
-            initialLabelIndex: NavigationService.to.locales
-                .indexOf(NavigationService.to.locale.value),
-            labels: NavigationService.to.locales,
-            onToggle: (index) {
-              NavigationService.to.locale.value =
-                  NavigationService.to.locales[index];
-
-              ///TODO:
-              // S.load(
-              //   Locale(locale.value),
-              // );
-              Get.updateLocale(
-                Locale(NavigationService.to.locale.value),
-              );
-            },
-          ),
-        );
-      },
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: ToggleSwitch(
+        minHeight: 30.0,
+        minWidth: 50.0,
+        activeBgColor: [
+          Colors.orange,
+        ],
+        totalSwitches: 2,
+        inactiveBgColor: Colors.grey,
+        activeFgColor: Colors.black,
+        inactiveFgColor: Colors.white,
+        // initialLabelIndex:
+        //     LanguageService.to.locales.indexOf(LanguageService.to.currentLocal),
+        // labels: LanguageService.to.locales,
+        onToggle: (index) {
+          // LanguageService.to.setLocal(LanguageService.to.locales[index]);
+        },
+      ),
     );
   }
 }
