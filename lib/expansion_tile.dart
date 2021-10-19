@@ -27,6 +27,7 @@ class AppExpansionTile extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -41,35 +42,35 @@ class AppExpansionTile extends StatelessWidget {
                         : context.theme.colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
                   ),
-                  Container(
-                    width: 25,
-                    height: 20,
-                    alignment: Alignment.center,
-                    margin: EdgeInsetsDirectional.only(end: 12.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      color: isOpen.value
-                          ? context.theme.colorScheme.primary
-                          : context.theme.colorScheme.onPrimary,
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        isOpen.value = !isOpen.value;
-                      },
-                      child: Icon(
-                        isOpen.value ? Icons.expand_less : Icons.expand_more,
+                  InkWell(
+                    onTap: () {
+                      isOpen.value = !isOpen.value;
+                    },
+                    child: Container(
+                      width: 25,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.0),
                         color: isOpen.value
-                            ? context.theme.colorScheme.onPrimary
-                            : context.theme.colorScheme.primary,
+                            ? context.theme.colorScheme.primary
+                            : context.theme.colorScheme.onPrimary,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          isOpen.value ? Icons.expand_less : Icons.expand_more,
+                          size: 20,
+                          color: isOpen.value
+                              ? context.theme.colorScheme.onPrimary
+                              : context.theme.colorScheme.primary,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            Divider(
-              color: context.theme.colorScheme.primary,
-            ),
+            if (isOpen.value) Divider(color: context.theme.colorScheme.primary),
             if (isOpen.value) children,
           ],
         ),
