@@ -1,25 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-//import lottie pacage
-class AppLoading extends StatelessWidget {
-  final double? width, height;
+import 'package:flutter/material.dart';
 
-  const AppLoading({
+class LoadingWidget extends StatelessWidget {
+  final bool center;
+  final bool isLoading;
+  final bool scaffoldOnLoading;
+  final Widget Function(BuildContext context) builder;
+  const LoadingWidget({
     Key? key,
-    this.width,
-    this.height,
+    this.center = true,
+    required this.isLoading,
+    this.scaffoldOnLoading = false,
+    required this.builder,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: height ?? 140,
-        width: width ?? 140,
-        child: Lottie.asset(
-          'assets/lottie/loading.json',
-        ),
-      ),
-    );
+    if (isLoading) {
+      Widget res = Padding(
+        padding: EdgeInsets.all(8),
+        child: LoadingComponent(),
+      );
+
+      if (center) {
+        res = Center(
+          child: res,
+        );
+      }
+      if (scaffoldOnLoading) {
+        res = Scaffold(
+          body: res,
+        );
+      }
+
+      return res;
+    }
+    return builder(context);
+  }
+}
+
+class LoadingComponent extends StatelessWidget {
+  const LoadingComponent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CircularProgressIndicator();
   }
 }
