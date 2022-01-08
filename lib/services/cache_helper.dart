@@ -13,7 +13,7 @@ class CacheHelperService extends GetxService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  dynamic getData({
+  Object? getData({
     required String key,
   }) {
     return sharedPreferences!.get(key);

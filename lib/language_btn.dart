@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_widget/services/navigation_service.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-// import 'package:inhouse_steak/generated/l10n.dart';
 
 class LanguageBtn extends StatelessWidget {
   final Color mainColor;
