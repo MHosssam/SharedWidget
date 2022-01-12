@@ -26,6 +26,7 @@ dependencies:
   scroll_to_index: ^2.0.0
   shared_preferences: ^2.0.5
   toggle_switch: ^1.2.0
+  url_launcher: ^6.0.18
 
 dependency_overrides:
   flutter_form_builder:
