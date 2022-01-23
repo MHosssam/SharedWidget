@@ -43,9 +43,7 @@ class AppDialog extends StatelessWidget {
           children: [
             Container(
               height: 40,
-              decoration: BoxDecoration(
-                color: bgColor,
-              ),
+              decoration: BoxDecoration(color: bgColor),
               child: Center(
                 child: TextWidget(
                   title,
@@ -56,14 +54,10 @@ class AppDialog extends StatelessWidget {
               ),
             ),
             child,
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             if (cancelText != null || confirmText != null)
               Padding(
-                padding: const EdgeInsets.all(
-                  8.0,
-                ),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     if (cancelText != null)
@@ -76,9 +70,7 @@ class AppDialog extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                    const SizedBox(
-                      width: 8.0,
-                    ),
+                    const SizedBox(width: 8.0),
                     if (confirmText != null)
                       Expanded(
                         child: ButtonWidget(
