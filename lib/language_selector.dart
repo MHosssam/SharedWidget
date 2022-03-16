@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:shared_widget/text_widget.dart';
 
 class LanguageSelector extends StatelessWidget {
@@ -10,16 +11,26 @@ class LanguageSelector extends StatelessWidget {
       width: 80,
       child: DropdownButton<Locale>(
         value: Localizations.maybeLocaleOf(context),
-        items: S.delegate.supportedLocales
-            .map(
-              (e) => DropdownMenuItem<Locale>(
-                child: TextWidget(
-                  e.languageCode == 'ar' ? 'العربية' : 'English',
-                ),
-                value: e,
-              ),
-            )
-            .toList(),
+        items: [
+          DropdownMenuItem<Locale>(
+            child: TextWidget('English'),
+            value: Locale('en'),
+          ),
+          DropdownMenuItem<Locale>(
+            child: TextWidget('العربية'),
+            value: Locale('ar'),
+          ),
+        ],
+        // S.delegate.supportedLocales
+        //     .map(
+        //       (e) => DropdownMenuItem<Locale>(
+        //         child: TextWidget(
+        //           e.languageCode == 'ar' ? 'العربية' : 'English',
+        //         ),
+        //         value: e,
+        //       ),
+        //     )
+        //     .toList(),
         isDense: true,
         onChanged: (value) async {
           if (value != null) {
