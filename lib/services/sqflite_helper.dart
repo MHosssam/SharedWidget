@@ -21,31 +21,34 @@ class DatabaseHelper {
   initDB() async {
     final dataBasePath = await getDatabasesPath();
     String path = join(dataBasePath, 'cart.db');
-    var myOwenDB = await openDatabase(path, version: 2, onCreate: _onCreate);
+    final myOwenDB = await openDatabase(path, version: 2, onCreate: _onCreate);
     return myOwenDB;
   }
 
   void _onCreate(Database db, int newVersion) async {
-    var serviceSql = '''
-CREATE TABLE "$tableName"(
-$columnID INTEGER PRIMARY KEY ,
-$title TEXT 
-)
+    final batch = db.batch();
+    final serviceSql = '''
+                      CREATE TABLE "$tableName"(
+                          $columnID INTEGER PRIMARY KEY ,
+                          $title TEXT 
+                      )
 ''';
-    await db.execute(serviceSql);
+    batch.execute(serviceSql);
+
+    batch.commit();
   }
 
   // save item
   Future<int> saveItem({required ServiceDB service}) async {
-    var dbUser = await db;
-    int result = await dbUser.insert(tableName, service.toMap());
+    final _saveDb = await db;
+    int result = await _saveDb.insert(tableName, service.toMap());
     return result;
   }
 
   //get all
   Future<List<ServiceDB>> getAllData() async {
-    var dbClient = await db;
-    List<Map<String, dynamic>> maps = await dbClient.query(
+    final _getDb = await db;
+    List<Map<String, dynamic>> maps = await _getDb.query(
       tableName,
       columns: [
         columnID,
@@ -63,16 +66,16 @@ $title TEXT
 
   //get count
   Future<int?> getServiceCount() async {
-    var dbClient = await db;
-    var sql = "SELECT COUNT(*) FROM $tableName";
-    return Sqflite.firstIntValue(await dbClient.rawQuery(sql));
+    final _getDb = await db;
+    final sql = "SELECT COUNT(*) FROM $tableName";
+    return Sqflite.firstIntValue(await _getDb.rawQuery(sql));
   }
 
   // get item
   Future<ServiceDB?> getItemById({required int serviceId}) async {
-    var dbClient = await db;
-    var sql = "SELECT * FROM $tableName WHERE $columnID = $serviceId";
-    var result = await dbClient.rawQuery(sql);
+    final _getDb = await db;
+    final sql = "SELECT * FROM $tableName WHERE $columnID = $serviceId";
+    final result = await _getDb.rawQuery(sql);
     if (result.isEmpty) {
       return null;
     }
@@ -81,7 +84,7 @@ $title TEXT
 
   // check id exist
   Future<bool> uidServiceExists({required int myServiceId}) async {
-    var result = await _db?.rawQuery(
+    final result = await _db?.rawQuery(
       'SELECT EXISTS(SELECT 1 FROM $tableName WHERE $columnID = $myServiceId)',
     );
     int exists = Sqflite.firstIntValue(result!)!;
@@ -90,8 +93,8 @@ $title TEXT
 
   // delete item
   Future<int> deleteItemById({required int serviceId}) async {
-    var dbClient = await db;
-    return await dbClient.delete(
+    final _deleteDb = await db;
+    return await _deleteDb.delete(
       tableName,
       where: '$columnID = ?',
       whereArgs: [serviceId],
@@ -99,18 +102,18 @@ $title TEXT
   }
 
   // delete all
-  deleteAllDataBase() async {
-    var dbClient = await db;
-    await dbClient.delete(tableName);
+  Future<void> deleteAllDataBase() async {
+    final deleteAllDb = await db;
+    await deleteAllDb.delete(tableName);
   }
 
   // update item
-  Future<int> updateService({
+  Future<int> updateItem({
     required int serviceId,
     required ServiceDB service,
   }) async {
-    var dbClient = await db;
-    return await dbClient.update(tableName, service.toMap(),
+    final _updateDb = await db;
+    return await _updateDb.update(tableName, service.toMap(),
         where: "$columnID = ? ", whereArgs: [serviceId]);
   }
 
