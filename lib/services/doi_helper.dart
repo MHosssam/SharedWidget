@@ -1,63 +1,124 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' hide Response;
 
 /*
  * dio: ^4.0.0 
  */
 
-class DioHelperService extends GetxService {
-  static DioHelperService get to => Get.find();
+const String authHeader = 'Authorization';
+const String baseUrl = 'baseUrl';
 
-  Dio? dio;
+class DioHelper {
+  static late Dio dio;
 
-  init() {
+  static init() {
     dio = Dio(
       BaseOptions(
-        ///TODO: Base Url.
-        baseUrl: 'https://student.valuxapps.com/api/',
+        baseUrl: baseUrl,
+        connectTimeout: 5000,
+        receiveTimeout: 5000,
         receiveDataWhenStatusError: true,
       ),
     );
   }
 
-  Future<Response> getData({
+  static Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
     String lang = 'en',
     String? token,
   }) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token ?? '',
+      authHeader: token ?? '',
     };
 
-    return await dio!.get(
+    return await dio.get(
       url,
-      queryParameters: query ?? null,
+      queryParameters: query,
     );
   }
 
-  Future<Response> postData({
+  static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
     String lang = 'en',
     String? token,
   }) async {
-    dio!.options.headers = {
+    dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
-      'Authorization': token ?? '',
+      authHeader: token ?? '',
     };
-
-    return dio!.post(
+    return dio.post(
       url,
       queryParameters: query,
       data: data,
     );
   }
+
+  static Future<Response> putData({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    String lang = 'en',
+    String? token,
+  }) async {
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      authHeader: token ?? '',
+    };
+    return dio.put(
+      url,
+      data: data,
+      queryParameters: query,
+    );
+  }
+
+  static Future<Response> deleteData({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    String lang = 'en',
+    String? token,
+  }) async {
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      authHeader: token ?? '',
+    };
+    return dio.delete(
+      url,
+      data: data,
+      queryParameters: query,
+    );
+  }
+
+  static Future<Response> downloadFile({
+    required String urlPath,
+    required String savePath,
+    Map<String, dynamic>? query,
+    Map<String, dynamic>? data,
+    String lang = 'en',
+    String? token,
+  }) async {
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'lang': lang,
+      authHeader: token ?? '',
+    };
+    return dio.download(
+      urlPath,
+      savePath,
+      data: data,
+      queryParameters: query,
+    );
+  }
 }
+
+
 
 ///TODO:
 /*
