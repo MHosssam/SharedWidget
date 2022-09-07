@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 /*
@@ -43,7 +45,7 @@ class DioHelper {
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
+    required Map<String, dynamic>? bodyData,
     String lang = appLocaleCode,
     String? token,
   }) async {
@@ -52,10 +54,17 @@ class DioHelper {
       'lang': lang,
       authHeader: token ?? '',
     };
+
+    ///TODO : to upload image
+    // String fileName = file.path.split('/').last;
+    // FormData formData = FormData.fromMap({
+    //   "file": await MultipartFile.fromFile(file.path, filename: fileName),
+    // });
+
     return dio.post(
       url,
+      data: bodyData,
       queryParameters: query,
-      data: data,
     );
   }
 
