@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 
 const String authHeader = 'Authorization';
 const String baseUrl = 'baseUrl';
+const String appLocaleCode = 'en';
 
 class DioHelper {
   static late Dio dio;
@@ -24,7 +25,7 @@ class DioHelper {
   static Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
-    String lang = 'en',
+    String lang = appLocaleCode,
     String? token,
   }) async {
     dio.options.headers = {
@@ -43,7 +44,7 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = 'en',
+    String lang = appLocaleCode,
     String? token,
   }) async {
     dio.options.headers = {
@@ -62,7 +63,7 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = 'en',
+    String lang = appLocaleCode,
     String? token,
   }) async {
     dio.options.headers = {
@@ -81,7 +82,7 @@ class DioHelper {
     required String url,
     Map<String, dynamic>? query,
     required Map<String, dynamic> data,
-    String lang = 'en',
+    String lang = appLocaleCode,
     String? token,
   }) async {
     dio.options.headers = {
@@ -101,7 +102,7 @@ class DioHelper {
     required String savePath,
     Map<String, dynamic>? query,
     Map<String, dynamic>? data,
-    String lang = 'en',
+    String lang = appLocaleCode,
     String? token,
   }) async {
     dio.options.headers = {
